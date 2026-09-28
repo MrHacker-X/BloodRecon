@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bloodrecon"
+# Keep in sync with bloodrecon/__init__.py (__version__).
+version = "2.1.1"
+description = "BloodRecon v2 — OSINT Intelligence Framework: 34 themeable recon modules, interactive menu and full CLI"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Alex Butler", email = "contact@vritrasec.com" }]
+keywords = [
+    "osint", "recon", "reconnaissance", "security", "pentesting",
+    "bugbounty", "threat-intelligence", "subdomains", "whois", "shodan",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet",
+    "Topic :: Security",
+    "Topic :: System :: Networking",
+]
+dependencies = [
+    "colorama>=0.4.6",
+    "dnspython>=2.7.0",
+    "mmh3>=5.1.0",
+    "phonenumbers>=9.0.10",
+    "Pillow>=11.3.0",
+    "requests>=2.32.4",
+    "urllib3>=2.5.0",
+    "whois>=1.20240129.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "build>=1.0",
+    "twine>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/MrHacker-X/BloodRecon"
+Repository = "https://github.com/MrHacker-X/BloodRecon"
+Issues = "https://github.com/MrHacker-X/BloodRecon/issues"
+Changelog = "https://github.com/MrHacker-X/BloodRecon/blob/main/CHANGELOG.md"
+
+[project.scripts]
+bloodrecon = "bloodrecon.cli:main"
+
+[tool.setuptools]
+packages = [
+    "bloodrecon",
+    "bloodrecon.modules",
+]
+
+[tool.setuptools.package-data]
+"bloodrecon.modules" = ["list-imp/*.txt"]
+
+# If a local Shodan config.py exists beside the module, never put it in the wheel
+[tool.setuptools.exclude-package-data]
+"bloodrecon.modules" = ["config.py"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

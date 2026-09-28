@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+
+      - name: Offline smoke suite
+        env:
+          NO_COLOR: "1"
+        shell: bash
+        run: |
+          bloodrecon --version
+          python -m bloodrecon --themes
+          python - <<'PY'
+          import subprocess, sys
+          def run(*args):
+              r = subprocess.run([sys.executable, "-m", "bloodrecon", *args],
+                                 capture_output=True, text=True, timeout=120)
+              assert r.returncode == 0, (args, r.returncode, r.stderr[-400:])
+              assert "Traceback" not in r.stderr, r.stderr[-400:]
+              return r.stdout
+          # offline modules
+          out = run("--temp-email", "test@10minutemail.com")
+          assert "TEMPORARY" in out
+          out = run("--useragent", "Mozilla/5.0 Chrome/120.0")
+          assert "Google Chrome" in out
+          out = run("--dork", "example.com")
+          assert "Dorks" in out
+          out = run("--maps", "https://www.google.com/maps/@51.5,-0.1,15z")
+          assert "DMS" in out
+          # invalid input must never crash
+          for flag in ("--temp-email", "--useragent", "--dork", "--maps"):
+              run(flag, "zzz_invalid###")
+          print("offline smoke suite: PASS")
+          PY
+
+      - name: pytest suite (offline)
+        run: pytest tests/ -v
+
+      - name: Package build check
+        run: |
+          pip install build twine
+          python -m build
+          twine check dist/*

@@ -1,0 +1,8 @@
+colorama==0.4.6
+dnspython==2.7.0
+mmh3==5.1.0
+phonenumbers==9.0.10
+Pillow==11.3.0
+requests==2.32.4
+urllib3==2.5.0
+whois==1.20240129.2

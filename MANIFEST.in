@@ -1,0 +1,14 @@
+include LICENSE
+include README.md
+include CHANGELOG.md
+include SECURITY.md
+include requirements.txt
+include bloodrecon.py
+recursive-include bloodrecon/modules/list-imp *.txt
+recursive-include tests *.py
+
+exclude modules/config.py
+exclude bloodrecon/modules/config.py
+global-exclude *.py[cod]
+global-exclude __pycache__
+global-exclude .DS_Store

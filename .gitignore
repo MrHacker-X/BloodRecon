@@ -1,0 +1,78 @@
+# ============================================================ Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+wheels/
+pip-wheel-metadata/
+*.egg-info/
+.eggs/
+.installed.cfg
+*.egg
+*.whl
+MANIFEST
+
+# ============================================================ Virtual envs
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ============================================================ Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+coverage.xml
+.cache/
+
+# ============================================================ Type checkers / linters
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# ============================================================ BloodRecon runtime artefacts
+# Tool-written output and user-specific state
+output/
+*.log
+# Local target lists and wordlists users add for their own scans
+*.targets
+# Shodan key may be written next to the module as config.py
+# (legacy path + current package path). Keep both out of git/PyPI.
+modules/config.py
+bloodrecon/modules/config.py
+# Accidental local copies of the JSON key store
+bloodrecon-shodan.json
+**/bloodrecon-shodan.json
+
+# ============================================================ Editors / IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# ============================================================ OS
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+.directory
+
+# ============================================================ Local tool state
+.kilo/
+.freebuff/
