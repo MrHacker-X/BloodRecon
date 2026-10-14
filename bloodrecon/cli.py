@@ -16,7 +16,7 @@ import time
 from bloodrecon.modules import colors as C
 from bloodrecon.modules import registry
 
-VERSION = "2.1.1"  # keep in sync with CHANGELOG.md / bloodrecon.__version__
+VERSION = "2.1.2"  # keep in sync with CHANGELOG.md / bloodrecon.__version__
 AUTHOR = "Alex Butler [Vritra Security Organization]"
 TOOL_NAME = "BloodRecon"
 
@@ -526,14 +526,18 @@ def main(argv=None):
     if args.connect:
         display_connect()
         return 0
+    from .remote_control import RemoteControl
+
     if args.interactive:
         display_banner()
-        interactive_mode()
+        with RemoteControl(tool_id="blood_recon", interactive=True):
+            interactive_mode()
         return 0
 
     # default: banner + interactive
     display_banner()
-    interactive_mode()
+    with RemoteControl(tool_id="blood_recon", interactive=True):
+        interactive_mode()
     return 0
 
 

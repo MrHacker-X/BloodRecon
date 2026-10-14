@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bloodrecon"
 # Keep in sync with bloodrecon/__init__.py (__version__).
-version = "2.1.1"
+version = "2.1.2"
 description = "BloodRecon v2 — OSINT Intelligence Framework: 34 themeable recon modules, interactive menu and full CLI"
 readme = "README.md"
 requires-python = ">=3.9"

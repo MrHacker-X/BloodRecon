@@ -10,6 +10,6 @@ Org    : Vritra Security Organization
 
 from bloodrecon.cli import main
 
-__version__ = "2.1.1"
+__version__ = "2.1.2"
 
 __all__ = ["main", "__version__"]
