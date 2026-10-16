@@ -16,7 +16,7 @@ import time
 from bloodrecon.modules import colors as C
 from bloodrecon.modules import registry
 
-VERSION = "2.1.3"  # keep in sync with CHANGELOG.md / bloodrecon.__version__
+VERSION = "2.2.0"  # keep in sync with CHANGELOG.md / bloodrecon.__version__
 AUTHOR = "Alex Butler [Vritra Security Organization]"
 TOOL_NAME = "BloodRecon"
 
